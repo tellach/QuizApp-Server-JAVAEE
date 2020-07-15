@@ -1,0 +1,5 @@
+asadmin create-jdbc-connection-pool --datasourceclassname org.postgresql.ds.PGSimpleDataSource --restype=javax.sql.DataSource --ping=true --property "driverClass=org.postgresql.Driver:ServerName=localhost:PortNumber=5432:User=postgres:Password=postgres:URL=jdbc\:postgresql\://localhost\:5432/bd_tp_alog:databaseName=bd_tp_alog" post-gre-sql_tp_alog_postgresPool
+
+asadmin create-jdbc-resource --connectionpoolid post-gre-sql_tp_alog_postgresPool jdbc/tp_alog-JNDI
+
+asadmin create-auth-realm --classname com.sun.enterprise.security.auth.realm.jdbc.JDBCRealm --property "jaas-context=jdbcRealm:datasource-jndi=jdbc/tp_alog-JNDI:user-table=sch_admin.admin_utilisateur:user-name-column=login:password-column=pwd:group-table=sch_admin.user_groupe_security:group-name-column=user_privilege:digest-algorithm=SHA-256" factureRealm
